@@ -6,6 +6,7 @@ public class Player_controller : MonoBehaviour, IControl
 {
     public LayerMask Ground, Wall;
     SpriteRenderer MySprite;
+    Animator attack_triger;
 
     int health;
     public int Health
@@ -77,6 +78,8 @@ public class Player_controller : MonoBehaviour, IControl
 
         MySprite = GetComponent<SpriteRenderer>();
 
+        attack_triger = GameObject.FindGameObjectWithTag("attack_trigger").GetComponent<Animator>();
+
         extraJumps = ExtraJumps;
     }
 
@@ -117,6 +120,15 @@ public class Player_controller : MonoBehaviour, IControl
         {
             rb.AddForce(new Vector2(0, 2) * jumpSpeed * Time.deltaTime);
             extraJumps--;
+        }
+    }
+
+    public void Attack()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+
+            attack_triger.SetBool("attack", true);
         }
     }
 
